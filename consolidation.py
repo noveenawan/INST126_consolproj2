@@ -56,40 +56,12 @@ def word_guessing_game():
                 player_guess = input("Guess a letter: ").lower()
 
                 # user guess must be 1
-                if (player_guess == 1):
+                if (len(player_guess) == 1):
                     if player_guess in guessed_letters:
                         print("You have already guessed that letter. Try again.")
                         continue
                     
-                    # going through each position to see if player guess matches an index of the chosen word
-                    correct_position = 0
-                    wrong_position = 0
-                    correct_guess_wrong_position = 0
-
-                    for i in range(len(chosen_word)):
-                        char = chosen_word[i]
-                        if char == player_guess:
-                            if underscore_word[i] == "_":
-                                correct_position += 1
-                            else:
-                                correct_guess_wrong_position += 1
-                    for char in underscore_word:
-                        if char == '_':
-                            if char != player_guess:
-                                wrong_position += 1
                     
-                    if correct_position > 0:
-                        print(f"The letter {player_guess} is in the correct position {correct_position} times")
-                    
-                    
-                
-
-                            
-
-
-
-
-
-
+            
 # word guessing game test case 
 word_guessing_game()
