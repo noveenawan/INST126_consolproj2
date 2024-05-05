@@ -59,9 +59,32 @@ def word_guessing_game():
                 if (len(player_guess) == 1):
                     if player_guess in guessed_letters:
                         print("You have already guessed that letter. Try again.")
-                        continue
                     
-                    
+                    else:
+                        guessed_letters.append(player_guess)
+                        player_scores[player]["letter_guesses"] += 1
+                        letter_count = chosen_word.count((player_guess))
+                        print(f"The letter '{player_guess}' appears {letter_count} times in the word.")
+
+                elif ((len(player_guess)) == len(chosen_word)):
+                    if (player_guess == chosen_word):
+                        print("You have guessed the word correctly!!!")
+                        guessed_word = True
+                        break
+                    else:
+                        print("You guess is incorrect. Try again :( )")
+                        attemps -= 1
+                        player_scores[player]["word_guesses"] += 1
+                        if attemps == 0:
+                            print("You have no more attempts. Try again next time!")
+                            break
+                else:
+                    print("Please re-enter your input.") 
             
+            if guessed_word or attemps == 0:
+                game_over = True
+                break
+
+        
 # word guessing game test case 
 word_guessing_game()
