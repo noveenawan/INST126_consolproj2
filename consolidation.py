@@ -30,40 +30,61 @@ def word_guessing_game():
     time.sleep(3)
     print("The word has been chosen. Hint: it has", len(chosen_word), "letters")
 
-    # loop through the players + setting up counter 
-    for player in range(1, total_players + 1):
-        attemps = 3
-        letter_guess = 0
-        word_guess = 0
-        guessed_letters = []
-        while (attemps > 0):
-            underscore_word = ''
-            for letter in chosen_word:
-                if (letter in guessed_letters):
-                    underscore_word += letter
-                else:
-                    underscore_word += '_'
-            print("Guess:", underscore_word)
-    
-            # the users guess and attempts 
-            player_guess = input("Guess a letter: ").lower()
-            # user guess must be 1
-            if (player_guess == 1):
-                if player_guess in guessed_letters:
-                    print("You have already guessed that letter. Try again.")
-                    continue
-                
-                correct_position = 0
-                wrong_position = 0
-                correct_guess_wrong_position = 0
+    # storing the player letter and word guesses in a dictionary
+    player_scores = {}
+    game_over = False
 
-                for i in range(len(chosen_word)):
-                    char = chosen_word[i]
-                    if char == player_guess:
-                        if underscore_word[i] == "_":
-                            correct_position += 1
-                        else:
-                            wrong_position += 1
+    while not game_over:
+    # loop through the players + setting up player turns/switching
+        for player in range(1, total_players + 1):
+            player_scores[player] = {"letter_guesses": 0, "word_guesses": 0}
+            print(f"It is now Player {player}'s turn to guess: ")
+            attemps = 3
+            guessed_letters = []
+            guessed_word = False
+
+            while (attemps > 0):
+                underscore_word = ''
+                for letter in chosen_word:
+                    if (letter in guessed_letters):
+                        underscore_word += letter
+                    else:
+                        underscore_word += '_'
+                print("Guess the word:", ' '.join(underscore_word))
+        
+                # the users guess and attempts 
+                player_guess = input("Guess a letter: ").lower()
+
+                # user guess must be 1
+                if (player_guess == 1):
+                    if player_guess in guessed_letters:
+                        print("You have already guessed that letter. Try again.")
+                        continue
+                    
+                    # going through each position to see if player guess matches an index of the chosen word
+                    correct_position = 0
+                    wrong_position = 0
+                    correct_guess_wrong_position = 0
+
+                    for i in range(len(chosen_word)):
+                        char = chosen_word[i]
+                        if char == player_guess:
+                            if underscore_word[i] == "_":
+                                correct_position += 1
+                            else:
+                                correct_guess_wrong_position += 1
+                    for char in underscore_word:
+                        if char == '_':
+                            if char != player_guess:
+                                wrong_position += 1
+                    
+                    if correct_position > 0:
+                        print(f"The letter {player_guess} is in the correct position {correct_position} times")
+                    
+                    
+                
+
+                            
 
 
 
