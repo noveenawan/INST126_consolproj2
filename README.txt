@@ -4,6 +4,7 @@ Word Guessing Game:
     The only hint is the length of the word.
 
   Functionality:
+    The program fetches a random word from a text file that I created.
     The program presents underscores, representing the letters of the world. 
     Players will have to type in a letter. If the player guesses the letter correctly, 
     the program will place that letter in its correct position. If the player guesses incorrectly
