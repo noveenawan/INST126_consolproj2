@@ -32,9 +32,9 @@ def word_guessing_game():
 
     # storing the player letter and word guesses in a dictionary
     player_scores = {}
-    game_over = False
 
     # loop through the players + setting up player turns/switching
+    game_over = False
     for player in range(1, total_players + 1):
         player_scores[player] = {"letter_guesses": 0, "word_guesses": 0}
         print(f"It is now Player {player}'s turn to guess: ")
@@ -80,14 +80,17 @@ def word_guessing_game():
             else:
                 print("Please re-enter your input.") 
             
-        if guessed_word or attemps == 0:
+        if guessed_word:
             game_over = True
             break
 
-    print("Thanks for playing :) ")
-    for player, player_scores in player_scores.items():
-        final_score = player_scores["letter_guesses"]
-        print(f"Player {player}: {final_score} letter guesses")
+    if game_over:
+        print("Thanks for playing :) ")
+        for player, player_scores in player_scores.items():
+            final_score = player_scores["letter_guesses"]
+            print(f"Player {player}: {final_score} letter guesses")
+    else:
+        print(f"You have used up your attempts. The correct word was {chosen_word}")
 
         
 # word guessing game test case 
