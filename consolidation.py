@@ -95,9 +95,16 @@ def word_guessing_game():
 # what isn't working in the program:
     # players are unable to switch turns
     # players are unable to end the game
+            # final score needs to be presented when game ends
+    # players need an option to guess the word completely 
+    # game needs to track the amount of guesses each player has + same for the word guesses (limited to 3)
 
 # what is working in the program:
     # the guessing process works well
+
+# extra features to add:
+    # if players types the same guess, will the program avoid and ask player to try again 
+    # or simply count that as a turn?
         
 # word guessing game test case 
 word_guessing_game()
