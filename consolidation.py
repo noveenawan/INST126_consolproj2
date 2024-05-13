@@ -92,6 +92,12 @@ def word_guessing_game():
     else:
         print(f"You have used up your attempts. The correct word was {chosen_word}")
 
+# what isn't working in the program:
+    # players are unable to switch turns
+    # players are unable to end the game
+
+# what is working in the program:
+    # the guessing process works well
         
 # word guessing game test case 
 word_guessing_game()
