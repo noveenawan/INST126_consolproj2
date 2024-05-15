@@ -103,8 +103,7 @@ def word_guessing_game():
     # the guessing process works well
 
 # extra features to add:
-    # if players types the same guess, will the program avoid and ask player to try again 
-    # or simply count that as a turn?
+    # theme for words in word bank - should program tell the user?
         
 # word guessing game test case 
 word_guessing_game()
