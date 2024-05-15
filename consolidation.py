@@ -31,66 +31,54 @@ def word_guessing_game():
     print("The word has been chosen. Hint: it has", len(chosen_word), "letters")
 
     # storing the player letter and word guesses in a dictionary
-    player_scores = {}
+    player_scores = {player: {"letter_guesses" : 0, "word_guesses" : 0} for player in range(1, total_players + 1)}
 
     # loop through the players + setting up player turns/switching
     game_over = False
-    for player in range(1, total_players + 1):
-        player_scores[player] = {"letter_guesses": 0, "word_guesses": 0}
+    player = 1
+
+    while not game_over:
         print(f"It is now Player {player}'s turn to guess: ")
         attemps = 3
         guessed_letters = []
         guessed_word = False
 
-        while (attemps > 0):
+        while attemps > 0 and not guessed_word:
             underscore_word = ''
             for letter in chosen_word:
-                if (letter in guessed_letters):
+                if letter in guessed_letters:
                     underscore_word += letter
                 else:
-                    underscore_word += '_'
+                    underscore_word += "_"
             print("Guess the word:", ' '.join(underscore_word))
-        
-            # the users guess and attempts 
-            player_guess = input("Guess a letter: ").lower()
+            guess_word_option = input("Would you like to guess the entire word? Enter 'yes' or 'no': ").lower()
 
-            # user guess must be 1
-            if (len(player_guess) == 1):
-                if player_guess in guessed_letters:
-                    print("You have already guessed that letter. Try again.")
-                    
-                else:
-                    guessed_letters.append(player_guess)
-                    player_scores[player]["letter_guesses"] += 1
-                    letter_count = chosen_word.count((player_guess))
-                    print(f"The letter '{player_guess}' appears {letter_count} times in the word.")
-
-            elif ((len(player_guess)) == len(chosen_word)):
-                if (player_guess == chosen_word):
+            if guess_word_option == 'yes':
+                word_guess = input("Guess the entire word: ").lower()
+                if word_guess == chosen_word:
                     print("You have guessed the word correctly!!!")
                     guessed_word = True
-                    break
+                    game_over = True
                 else:
-                    print("You guess is incorrect. Try again :( )")
-                    attemps -= 1
+                    print("Your guess is incorrect. Try again :(")
+                    attempts -= 1
                     player_scores[player]["word_guesses"] += 1
-                    if attemps == 0:
+                    if attempts == 0:
                         print("You have no more attempts. Try again next time!")
-                        break
+            elif guess_word_option == 'no':
+                letter_guess = input("Guess a letter: ").lower()
+                if len(letter_guess) == 1:
+                    if letter_guess in guessed_letters:
+                        print("You have already guessed that letter. Try again.")
+                    else:
+                        guessed_letters.append(letter_guess)
+                        player_scores[player]["letter_guesses"] += 1
+                        letter_count = chosen_word.count(letter_guess)
+                        print(f"The letter '{letter_guess}' appears {letter_count} times in the word.")
+                else:
+                    print("Invalid input. Please enter a single letter.")
             else:
-                print("Please re-enter your input.") 
-            
-        if guessed_word:
-            game_over = True
-            break
-
-    if game_over:
-        print("Thanks for playing :) ")
-        for player, player_scores in player_scores.items():
-            final_score = player_scores["letter_guesses"]
-            print(f"Player {player}: {final_score} letter guesses")
-    else:
-        print(f"You have used up your attempts. The correct word was {chosen_word}")
+                print("Invalid input. Please enter 'yes' or 'no'.")
 
 # what isn't working in the program:
     # players are unable to switch turns
